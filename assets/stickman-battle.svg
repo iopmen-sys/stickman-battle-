@@ -1,0 +1,430 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" width="100%" height="100%" role="img" aria-label="Epic battle of blue and red stick fighters created by @cashoverseer">
+  <defs>
+    <linearGradient id="bgSky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060913" />
+      <stop offset="50%" stop-color="#0d1629" />
+      <stop offset="100%" stop-color="#170914" />
+    </linearGradient>
+
+    <linearGradient id="arenaLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.08" />
+      <stop offset="30%" stop-color="#38bdf8" stop-opacity="0.65" />
+      <stop offset="70%" stop-color="#fb7185" stop-opacity="0.65" />
+      <stop offset="100%" stop-color="#fb7185" stop-opacity="0.08" />
+    </linearGradient>
+
+    <radialGradient id="blastCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="30%" stop-color="#fef08a" stop-opacity="0.95" />
+      <stop offset="65%" stop-color="#fb7185" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#e11d48" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="blueBlast" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="35%" stop-color="#7dd3fc" stop-opacity="0.9" />
+      <stop offset="70%" stop-color="#0284c7" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#0369a1" stop-opacity="0" />
+    </radialGradient>
+
+    <filter id="glowSoft" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="3.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <pattern id="gridArena" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#1e293b" stroke-width="0.65" opacity="0.45" />
+    </pattern>
+
+    <style>
+      .cam-shake {
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: cameraImpact 11s linear infinite;
+      }
+
+      /* Blue fighter */
+      .blue-fighter {
+        transform-box: fill-box;
+        transform-origin: bottom center;
+        animation: blueAction 11s ease-in-out infinite;
+      }
+      .blue-limb {
+        stroke: #38bdf8;
+        stroke-width: 7;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+        filter: url(#glowSoft);
+      }
+      .blue-armor {
+        fill: #0c192e;
+        stroke: #38bdf8;
+        stroke-width: 3;
+        filter: url(#glowSoft);
+      }
+      .blue-joint {
+        fill: #e0f2fe;
+        stroke: #0284c7;
+        stroke-width: 2;
+      }
+      .blue-scarf {
+        fill: none;
+        stroke: #7dd3fc;
+        stroke-width: 4;
+        stroke-linecap: round;
+        animation: scarfWave 0.7s ease-in-out infinite;
+      }
+      .blue-hip-l { transform-box: fill-box; transform-origin: 0px 0px; animation: strideA 0.55s ease-in-out infinite; }
+      .blue-hip-r { transform-box: fill-box; transform-origin: 0px 0px; animation: strideB 0.55s ease-in-out infinite; }
+      .blue-arm-fire { transform-box: fill-box; transform-origin: 0px 0px; animation: blueFirePose 11s linear infinite; }
+
+      /* Red fighter */
+      .red-fighter {
+        transform-box: fill-box;
+        transform-origin: bottom center;
+        animation: redAction 11s ease-in-out infinite;
+      }
+      .red-limb {
+        stroke: #fb7185;
+        stroke-width: 7;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+        filter: url(#glowSoft);
+      }
+      .red-armor {
+        fill: #240b15;
+        stroke: #fb7185;
+        stroke-width: 3;
+        filter: url(#glowSoft);
+      }
+      .red-joint {
+        fill: #ffe4e6;
+        stroke: #be123c;
+        stroke-width: 2;
+      }
+      .red-hip-l { transform-box: fill-box; transform-origin: 0px 0px; animation: strideB 0.55s ease-in-out infinite; }
+      .red-hip-r { transform-box: fill-box; transform-origin: 0px 0px; animation: strideA 0.55s ease-in-out infinite; }
+      .red-arm-fire { transform-box: fill-box; transform-origin: 0px 0px; animation: redFirePose 11s linear infinite; }
+
+      /* Bullets */
+      .b1 { animation: bulletB1 11s linear infinite; }
+      .b2 { animation: bulletB2 11s linear infinite; }
+      .b3 { animation: bulletB3 11s linear infinite; }
+      .bFinal { animation: bulletBFinal 11s linear infinite; }
+      .r1 { animation: bulletR1 11s linear infinite; }
+      .r2 { animation: bulletR2 11s linear infinite; }
+
+      /* Explosions */
+      .ex1 { transform-box: fill-box; transform-origin: center; animation: expAnim1 11s ease-out infinite; }
+      .ex2 { transform-box: fill-box; transform-origin: center; animation: expAnim2 11s ease-out infinite; }
+      .ex3 { transform-box: fill-box; transform-origin: center; animation: expAnim3 11s ease-out infinite; }
+      .exFinal { transform-box: fill-box; transform-origin: center; animation: expAnimFinal 11s ease-out infinite; }
+
+      /* Muzzle flashes */
+      .muzzle-b { transform-box: fill-box; transform-origin: center; animation: muzzleFlashB 11s linear infinite; }
+      .muzzle-r { transform-box: fill-box; transform-origin: center; animation: muzzleFlashR 11s linear infinite; }
+
+      /* UI & Credits */
+      .ko-banner { transform-box: fill-box; transform-origin: center; animation: koShow 11s ease-out infinite; }
+      .author-tag { transform-box: fill-box; transform-origin: center; animation: authorGlow 11s ease-in-out infinite; }
+      .red-hp { transform-box: fill-box; transform-origin: left center; animation: redHpDrain 11s linear infinite; }
+
+      .txt-hud {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.9px;
+      }
+      .txt-ko {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 21px;
+        font-weight: 800;
+        fill: #f8fafc;
+        letter-spacing: 1.5px;
+      }
+      .txt-author {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 15px;
+        font-weight: 700;
+        fill: #38bdf8;
+        letter-spacing: 0.6px;
+      }
+
+      @keyframes strideA {
+        0%, 100% { transform: rotate(28deg); }
+        50% { transform: rotate(-30deg); }
+      }
+      @keyframes strideB {
+        0%, 100% { transform: rotate(-30deg); }
+        50% { transform: rotate(28deg); }
+      }
+      @keyframes scarfWave {
+        0%, 100% { d: path("M -4 -22 Q -26 -30 -44 -18"); }
+        50% { d: path("M -4 -22 Q -28 -12 -46 -26"); }
+      }
+
+      @keyframes cameraImpact {
+        0%, 19%, 34%, 51%, 74%, 100% { transform: translate(0px, 0px); }
+        20% { transform: translate(-4px, 2px); }
+        21% { transform: translate(4px, -2px); }
+        35% { transform: translate(5px, -3px); }
+        36% { transform: translate(-4px, 2px); }
+        52% { transform: translate(-5px, -2px); }
+        53% { transform: translate(4px, 3px); }
+        75% { transform: translate(-8px, 5px); }
+        76% { transform: translate(8px, -5px); }
+        77% { transform: translate(-6px, 4px); }
+        78% { transform: translate(0px, 0px); }
+      }
+
+      @keyframes blueAction {
+        0%   { transform: translate(150px, 212px) scaleX(1); }
+        12%  { transform: translate(235px, 212px) scaleX(1); }
+        20%  { transform: translate(275px, 162px) scaleX(1); }
+        28%  { transform: translate(240px, 212px) scaleX(1); }
+        42%  { transform: translate(310px, 212px) scaleX(1); }
+        54%  { transform: translate(250px, 168px) scaleX(1); }
+        66%  { transform: translate(365px, 212px) scaleX(1); }
+        74%  { transform: translate(395px, 212px) scaleX(1); }
+        85%  { transform: translate(375px, 212px) scaleX(1); }
+        100% { transform: translate(150px, 212px) scaleX(1); }
+      }
+
+      @keyframes blueFirePose {
+        0%, 16%, 26%, 41%, 65%, 78%, 100% { transform: rotate(0deg); }
+        18%, 22% { transform: rotate(-18deg); }
+        43%, 47% { transform: rotate(-8deg); }
+        72%, 75% { transform: rotate(-12deg); }
+      }
+
+      @keyframes redAction {
+        0%   { transform: translate(780px, 212px) rotate(0deg); opacity: 1; }
+        14%  { transform: translate(685px, 212px) rotate(0deg); opacity: 1; }
+        24%  { transform: translate(720px, 168px) rotate(-6deg); opacity: 1; }
+        35%  { transform: translate(640px, 212px) rotate(6deg); opacity: 1; }
+        48%  { transform: translate(675px, 212px) rotate(0deg); opacity: 1; }
+        62%  { transform: translate(630px, 212px) rotate(0deg); opacity: 1; }
+        74%  { transform: translate(665px, 212px) rotate(0deg); opacity: 1; }
+        79%  { transform: translate(765px, 224px) rotate(58deg); opacity: 0.92; }
+        85%  { transform: translate(805px, 272px) rotate(88deg); opacity: 0.78; }
+        96%  { transform: translate(805px, 272px) rotate(88deg); opacity: 0.78; }
+        100% { transform: translate(780px, 212px) rotate(0deg); opacity: 1; }
+      }
+
+      @keyframes redFirePose {
+        0%, 31%, 39%, 100% { transform: rotate(0deg); }
+        33%, 36% { transform: rotate(12deg); }
+      }
+
+      @keyframes bulletB1 {
+        0%, 17.9% { opacity: 0; transform: translate(275px, 186px); }
+        18% { opacity: 1; transform: translate(275px, 186px); }
+        23.5% { opacity: 1; transform: translate(710px, 182px); }
+        23.6%, 100% { opacity: 0; transform: translate(710px, 182px); }
+      }
+      @keyframes bulletB2 {
+        0%, 25.9% { opacity: 0; transform: translate(280px, 228px); }
+        26% { opacity: 1; transform: translate(280px, 228px); }
+        34.5% { opacity: 1; transform: translate(645px, 232px); }
+        34.6%, 100% { opacity: 0; transform: translate(645px, 232px); }
+      }
+      @keyframes bulletB3 {
+        0%, 43.9% { opacity: 0; transform: translate(352px, 234px); }
+        44% { opacity: 1; transform: translate(352px, 234px); }
+        51.5% { opacity: 1; transform: translate(670px, 234px); }
+        51.6%, 100% { opacity: 0; transform: translate(670px, 234px); }
+      }
+      @keyframes bulletR1 {
+        0%, 33.9% { opacity: 0; transform: translate(600px, 234px); }
+        34% { opacity: 1; transform: translate(600px, 234px); }
+        42.5% { opacity: 1; transform: translate(295px, 228px); }
+        42.6%, 100% { opacity: 0; transform: translate(295px, 228px); }
+      }
+      @keyframes bulletR2 {
+        0%, 52.9% { opacity: 0; transform: translate(630px, 234px); }
+        53% { opacity: 1; transform: translate(630px, 234px); }
+        60.5% { opacity: 1; transform: translate(265px, 192px); }
+        60.6%, 100% { opacity: 0; transform: translate(265px, 192px); }
+      }
+      @keyframes bulletBFinal {
+        0%, 71.9% { opacity: 0; transform: translate(440px, 234px) scale(1); }
+        72% { opacity: 1; transform: translate(440px, 234px) scale(1.25); }
+        75.5% { opacity: 1; transform: translate(675px, 234px) scale(1.45); }
+        75.6%, 100% { opacity: 0; transform: translate(675px, 234px) scale(1); }
+      }
+
+      @keyframes muzzleFlashB {
+        0%, 17.8%, 19.5%, 25.8%, 27.5%, 43.8%, 45.5%, 71.8%, 74%, 100% { opacity: 0; transform: scale(0.3); }
+        18.2%, 26.2%, 44.2%, 72.3% { opacity: 1; transform: scale(1.25); }
+      }
+      @keyframes muzzleFlashR {
+        0%, 33.8%, 35.5%, 52.8%, 54.5%, 100% { opacity: 0; transform: scale(0.3); }
+        34.2%, 53.2% { opacity: 1; transform: scale(1.2); }
+      }
+
+      @keyframes expAnim1 {
+        0%, 23.5%, 31%, 100% { opacity: 0; transform: scale(0.2); }
+        24.5% { opacity: 1; transform: scale(1); }
+        30% { opacity: 0; transform: scale(1.65); }
+      }
+      @keyframes expAnim2 {
+        0%, 34.5%, 42%, 100% { opacity: 0; transform: scale(0.2); }
+        35.5% { opacity: 1; transform: scale(1.15); }
+        41% { opacity: 0; transform: scale(1.8); }
+      }
+      @keyframes expAnim3 {
+        0%, 51.5%, 59%, 100% { opacity: 0; transform: scale(0.2); }
+        52.5% { opacity: 1; transform: scale(1.2); }
+        58% { opacity: 0; transform: scale(1.85); }
+      }
+      @keyframes expAnimFinal {
+        0%, 75.5%, 87%, 100% { opacity: 0; transform: scale(0.2); }
+        76.5% { opacity: 1; transform: scale(1.6); }
+        86% { opacity: 0; transform: scale(2.5); }
+      }
+
+      @keyframes redHpDrain {
+        0% { transform: scaleX(1); }
+        35% { transform: scaleX(0.72); }
+        52% { transform: scaleX(0.45); }
+        76% { transform: scaleX(0.04); }
+        96% { transform: scaleX(0.04); }
+        100% { transform: scaleX(1); }
+      }
+
+      @keyframes koShow {
+        0%, 78% { opacity: 0; transform: translateY(10px) scale(0.92); }
+        82%, 96% { opacity: 1; transform: translateY(0px) scale(1); }
+        99%, 100% { opacity: 0; transform: translateY(-6px) scale(0.96); }
+      }
+
+      @keyframes authorGlow {
+        0%, 77% { opacity: 0.8; transform: scale(1); }
+        82%, 96% { opacity: 1; transform: scale(1.05); }
+        100% { opacity: 0.8; transform: scale(1); }
+      }
+    </style>
+  </defs>
+
+  <g class="cam-shake">
+    <rect x="0" y="0" width="960" height="360" rx="18" fill="url(#bgSky)" />
+    <rect x="0" y="0" width="960" height="360" rx="18" fill="url(#gridArena)" />
+    <rect x="1" y="1" width="958" height="358" rx="17" fill="none" stroke="#1e293b" stroke-width="1.5" />
+
+    <text x="32" y="36" class="txt-hud" fill="#38bdf8">BLUE // @CASHOVERSEER</text>
+    <rect x="200" y="25" width="175" height="11" rx="5" fill="#0f172a" stroke="#1e293b" />
+    <rect x="202" y="27" width="171" height="7" rx="3.5" fill="#38bdf8" />
+
+    <text x="480" y="36" text-anchor="middle" class="txt-hud" fill="#94a3b8">COMBAT SIMULATION</text>
+
+    <text x="585" y="36" class="txt-hud" fill="#fb7185">RED RIVAL</text>
+    <rect x="665" y="25" width="260" height="11" rx="5" fill="#0f172a" stroke="#1e293b" />
+    <rect x="667" y="27" width="256" height="7" rx="3.5" fill="#fb7185" class="red-hp" />
+
+    <line x1="55" y1="292" x2="905" y2="292" stroke="url(#arenaLine)" stroke-width="3" />
+    <polygon points="110,292 850,292 880,326 80,326" fill="#080d18" opacity="0.55" />
+
+    <!-- BLUE FIGHTER MODEL -->
+    <g class="blue-fighter">
+      <path d="M -4 -22 Q -26 -30 -44 -18" class="blue-scarf" />
+      <g class="blue-hip-l" transform="translate(0, 26)">
+        <line x1="0" y1="0" x2="-6" y2="26" class="blue-limb" />
+        <line x1="-6" y1="26" x2="-12" y2="52" class="blue-limb" />
+        <circle cx="-6" cy="26" r="3.5" class="blue-joint" />
+      </g>
+      <path d="M -11 -22 L 11 -22 L 8 28 L -8 28 Z" class="blue-armor" />
+      <line x1="0" y1="-16" x2="0" y2="20" stroke="#7dd3fc" stroke-width="2" opacity="0.7" />
+      <circle cx="0" cy="-35" r="14" class="blue-armor" />
+      <path d="M 3 -39 L 15 -36 L 13 -30 L 3 -31 Z" fill="#38bdf8" />
+      <g class="blue-hip-r" transform="translate(2, 26)">
+        <line x1="0" y1="0" x2="8" y2="26" class="blue-limb" />
+        <line x1="8" y1="26" x2="15" y2="52" class="blue-limb" />
+        <circle cx="8" cy="26" r="3.5" class="blue-joint" />
+      </g>
+      <g class="blue-arm-fire" transform="translate(4, -12)">
+        <line x1="0" y1="0" x2="18" y2="6" class="blue-limb" />
+        <line x1="18" y1="6" x2="32" y2="4" class="blue-limb" />
+        <circle cx="18" cy="6" r="3.5" class="blue-joint" />
+        <rect x="26" y="-2" width="24" height="10" rx="3" fill="#0284c7" stroke="#bae6fd" stroke-width="1.6" />
+        <rect x="32" y="8" width="6" height="7" rx="1.5" fill="#0369a1" />
+        <polygon points="52,3 66,-5 62,3 66,11" fill="#e0f2fe" class="muzzle-b" />
+      </g>
+    </g>
+
+    <!-- RED FIGHTER MODEL -->
+    <g class="red-fighter">
+      <g class="red-hip-l" transform="translate(0, 26)">
+        <line x1="0" y1="0" x2="6" y2="26" class="red-limb" />
+        <line x1="6" y1="26" x2="12" y2="52" class="red-limb" />
+        <circle cx="6" cy="26" r="3.5" class="red-joint" />
+      </g>
+      <path d="M -11 -22 L 11 -22 L 8 28 L -8 28 Z" class="red-armor" />
+      <line x1="0" y1="-16" x2="0" y2="20" stroke="#fda4af" stroke-width="2" opacity="0.7" />
+      <circle cx="0" cy="-35" r="14" class="red-armor" />
+      <path d="M -3 -39 L -15 -36 L -13 -30 L -3 -31 Z" fill="#fb7185" />
+      <g class="red-hip-r" transform="translate(-2, 26)">
+        <line x1="0" y1="0" x2="-8" y2="26" class="red-limb" />
+        <line x1="-8" y1="26" x2="-15" y2="52" class="red-limb" />
+        <circle cx="-8" cy="26" r="3.5" class="red-joint" />
+      </g>
+      <g class="red-arm-fire" transform="translate(-4, -12)">
+        <line x1="0" y1="0" x2="-18" y2="6" class="red-limb" />
+        <line x1="-18" y1="6" x2="-32" y2="4" class="red-limb" />
+        <circle cx="-18" cy="6" r="3.5" class="red-joint" />
+        <rect x="-50" y="-2" width="24" height="10" rx="3" fill="#be123c" stroke="#fecdd3" stroke-width="1.6" />
+        <rect x="-38" y="8" width="6" height="7" rx="1.5" fill="#9f1239" />
+        <polygon points="-52,3 -66,-5 -62,3 -66,11" fill="#ffe4e6" class="muzzle-r" />
+      </g>
+    </g>
+
+    <!-- PROJECTILES -->
+    <g class="b1">
+      <line x1="-26" y1="0" x2="8" y2="0" stroke="#38bdf8" stroke-width="4.5" stroke-linecap="round" filter="url(#glowSoft)" />
+      <circle cx="8" cy="0" r="5" fill="#ffffff" />
+    </g>
+    <g class="b2">
+      <line x1="-28" y1="0" x2="8" y2="0" stroke="#7dd3fc" stroke-width="4.5" stroke-linecap="round" filter="url(#glowSoft)" />
+      <circle cx="8" cy="0" r="5" fill="#ffffff" />
+    </g>
+    <g class="b3">
+      <line x1="-30" y1="0" x2="10" y2="0" stroke="#38bdf8" stroke-width="5" stroke-linecap="round" filter="url(#glowSoft)" />
+      <circle cx="10" cy="0" r="5.5" fill="#e0f2fe" />
+    </g>
+    <g class="r1">
+      <line x1="-8" y1="0" x2="26" y2="0" stroke="#fb7185" stroke-width="4.5" stroke-linecap="round" filter="url(#glowSoft)" />
+      <circle cx="-8" cy="0" r="5" fill="#ffe4e6" />
+    </g>
+    <g class="r2">
+      <line x1="-8" y1="0" x2="26" y2="0" stroke="#f43f5e" stroke-width="4.5" stroke-linecap="round" filter="url(#glowSoft)" />
+      <circle cx="-8" cy="0" r="5" fill="#ffe4e6" />
+    </g>
+    <g class="bFinal">
+      <line x1="-46" y1="0" x2="14" y2="0" stroke="#38bdf8" stroke-width="7" stroke-linecap="round" filter="url(#glowSoft)" />
+      <circle cx="14" cy="0" r="7.5" fill="#ffffff" />
+    </g>
+
+    <!-- EXPLOSIONS -->
+    <g class="ex1" transform="translate(715, 185)">
+      <circle cx="0" cy="0" r="30" fill="url(#blueBlast)" />
+      <circle cx="0" cy="0" r="38" fill="none" stroke="#7dd3fc" stroke-width="2" />
+      <line x1="-24" y1="-20" x2="-38" y2="-32" stroke="#e0f2fe" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="25" y1="-18" x2="40" y2="-30" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="0" y1="26" x2="0" y2="42" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" />
+    </g>
+    <g class="ex2" transform="translate(645, 232)">
+      <circle cx="0" cy="0" r="36" fill="url(#blastCore)" />
+      <circle cx="0" cy="0" r="46" fill="none" stroke="#fda4af" stroke-width="2.2" />
+      <line x1="-28" y1="16" x2="-44" y2="28" stroke="#fef08a" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="28" y1="-18" x2="44" y2="-30" stroke="#fb7185" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="-20" y1="-26" x2="-32" y2="-40" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" />
+    </g>
+    <g class="ex3" transform="translate(672, 234)">
+      <circle cx="0" cy="0" r="38" fill="url(#blastCore)" />
+      <circle cx="0" cy="0" r="48" fill="none" stroke="#fef08a" stroke-width="2.2" />
+      <line x1="-30" y1="-14" x2="-46" y2="-24" stroke="#fef08a" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="28" y1="16" x2="44" y2="28" stroke="#fb7185" stroke-width="2.5" stroke-linecap="round" />
